@@ -1,0 +1,66 @@
+<% provide(:title, "Bank Sync") %>
+
+<div class="jumbotron" id="waiting-message">
+  <div class="container">
+    <p class="center"><strong>Loading Sync...</strong></p>
+  </div>
+</div>
+
+<%= javascript_include_tag "https://cdn.belvo.io/belvo-widget-sandbox-1-stable.js" %>
+<div id="belvo"></div>
+
+<script type="text/javascript">
+    token = document.querySelector('meta[name="csrf-token"]').content;
+
+    function successCallbackFunction(link, institution) {
+        request = {
+          link_id: link,
+          institution: institution,
+        }
+
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            "X-CSRF-Token": token,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(request)
+        })
+        .then(response => {
+            window.location.replace("/");
+        })
+        .catch(error => console.error("Login Error:", error))
+    }
+
+    function onExitCallbackFunction(data) {
+        console.log('Exit Data', data)
+    }
+
+    function onEventCallbackFunction(data) {
+      console.log(data);
+      if (data.eventName == 'PAGE_LOAD')
+      {
+        var waitingBox = document.querySelector("#waiting-message");
+        waitingBox.parentNode.removeChild(waitingBox);
+      }
+    }
+
+    function getAccessToken() { // Function to call your server-side to generate the access_token and retrieve the your access token
+        return fetch('/get_token', { method: 'GET' })
+            .then(response => response.json())
+            .then((data) => data.access)
+            .catch(error => console.error('Error:', error))
+    }
+
+    function openBelvoWidget(accessToken) {
+        belvoSDK.createWidget(accessToken, {
+            locale: 'en',
+            country_codes: ['MX'],
+            callback: (link, institution) => successCallbackFunction(link, institution),
+            onExit: (data) => onExitCallbackFunction(data),
+            onEvent: (data) => onEventCallbackFunction(data)
+        }).build();
+    }
+
+    getAccessToken().then(openBelvoWidget)
+  </script>
