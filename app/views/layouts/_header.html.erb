@@ -1,6 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Budget Tracker", root_path, id: "logo" %>
+    <%= link_to "Budget Tracker", dashboard_path, id: "logo" %>
     <nav>
 			<div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed"
@@ -17,7 +17,7 @@
           id="bs-example-navbar-collapse-1">
         <% if logged_in? %>
           <li><%= link_to "Home", dashboard_path %></li>
-          <li><%= link_to "Expenses", transactions_path %></li>
+          <li><%= link_to "Expenses", expenses_path %></li>
           <li>
           <%= link_to "Log out", logout_path, method: :delete %>
           </li>

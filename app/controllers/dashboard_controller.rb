@@ -11,8 +11,9 @@ class DashboardController < ApplicationController
     get_balance
 end
 
-def transactions
-    render 'transactions'
+def expenses
+    get_expenses
+    render 'expenses'
 end
 
 private
@@ -55,5 +56,15 @@ private
 
       @requested_accounts = true
     end
+  end
+
+  def get_expenses
+    response = belvo_client.transactions.retrieve(
+      link: current_session['link'],
+      date_from: (Date.today - 30),
+      options: {"date_to": Date.today}
+    )
+
+    @expenses = response
   end
 end
