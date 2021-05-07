@@ -10,8 +10,8 @@ module ApplicationHelper
 
     def belvo_client
         Belvo::Client.new(
-          'f791ec40-d501-4027-b48c-02dc0a8f3cf7',
-          '_feXJy4PF2zfYoskSP_E6c92VhonTbXPiCeK#C75a-zz7VPfYOKFb_e9nqWkpiJ_',
+        ENV['BELVO_SECRET_KEY'],
+        ENV['BELVO_PASSWORD'],
           'https://sandbox.belvo.com'
         )
     end
