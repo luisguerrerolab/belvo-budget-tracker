@@ -31,6 +31,9 @@ If you want to run this app using a Docker container, the following is a quick g
 
 ### Build and Run
 
+The first step is to set your secret API Keys as environment variables, so they can be passed through the configuration files to the app. Place your own values here:
+https://github.com/luisguerrerolab/belvo-budget-tracker/blob/4d7c51915b39941278ee740237f7961c4dbbf6c8/app-variables.env
+
 In order to build the image specified in `Dockerfile` run the following command:
 ```
 docker-compose build
