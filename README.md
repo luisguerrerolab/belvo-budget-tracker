@@ -7,6 +7,8 @@
 
 This project simulates a tool that help users to stay on track of a budget that they previously established. This app integrates with Belvo in order to fetch the user's financial data from some bank, which then will be shown along with the predefined budget preferences, so the user can see at glance how much is still left to spend.
 
+![](preview-belvo-challenge.jpg)
+
 ## Main Features
 
 - **Connect Widget**. The app starts with a welcome message and a button to launch the bank sync. The widget was configured to show institutions from Mexico only. Once the user enters a set of valid credentials, the generated link is stored in the session scope of the application.
