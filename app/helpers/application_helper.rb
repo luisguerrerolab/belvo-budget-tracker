@@ -11,7 +11,7 @@ module ApplicationHelper
     def belvo_client
         Belvo::Client.new(
           'f791ec40-d501-4027-b48c-02dc0a8f3cf7',
-          'AUXJ7Ojlk#ySlOm0aeksP1BnQbErbY7KOk575*iuzZmQQ8DsOhJfj758pl9yJFyU',
+          '_feXJy4PF2zfYoskSP_E6c92VhonTbXPiCeK#C75a-zz7VPfYOKFb_e9nqWkpiJ_',
           'https://sandbox.belvo.com'
         )
     end

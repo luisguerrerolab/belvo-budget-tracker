@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
   def index
     get_owner
     get_accounts
+    get_balance
 end
 
 def transactions
@@ -25,6 +26,16 @@ private
 
       @requested_owner = true;
     end
+  end
+
+  def get_balance
+    response = belvo_client.balances.retrieve(
+        link: current_session['link'],
+        date_from: (Date.today - 30),
+        options: { "date_to": Date.today }
+    )
+    
+    @balance_data = response.collect{|balance| [balance['account']['name'], balance['current_balance']]}
   end
 
   def get_accounts
