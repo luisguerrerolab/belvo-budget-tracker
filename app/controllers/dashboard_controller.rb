@@ -56,6 +56,6 @@ class DashboardController < ApplicationController
         options: {"date_to": Date.today}
       )
 
-      @expenses = response
+      @expenses = response.sort_by { |expense| [expense['value_date']]}.reverse
     end
 end
